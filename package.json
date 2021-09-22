@@ -1,7 +1,10 @@
 {
+  "name": "file-browser",
   "private": true,
   "scripts": {
-    "generate": "graphql-codegen"
+    "generate": "graphql-codegen",
+    "start-client": "cd client && yarn start",
+    "start-server": "cd server && yarn start"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^1.13.5",
@@ -11,7 +14,12 @@
     "@graphql-codegen/typescript-react-apollo": "^1.15.3",
     "@graphql-codegen/typescript-resolvers": "^1.13.5",
     "graphql": "^15.0.0",
+    "prettier": "^2.4.1",
     "ts-node": "^8.10.1",
     "typescript": "^3.9.6"
-  }
+  },
+  "workspaces": [
+    "packages/"
+  ]
+
 }
