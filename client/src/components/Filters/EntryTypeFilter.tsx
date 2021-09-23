@@ -6,18 +6,18 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 
-export const FileExtensionFilter: React.FunctionComponent = () => {
+export const EntryTypeFilter: React.FunctionComponent = () => {
     const viewContext = UseViewContext();
 
-    const fileExtensionFilterValue = viewContext?.fileExtensionFilterValue || '';
+    const fileExtensionFilterValue = viewContext?.entryTypeFilterValue || '';
 
     const handleFileExtensionSelect = (event: any) => {
         if (event.target.value == 'Directory' || event.target.value == 'File')
-            viewContext && viewContext.handleFIleTypeDropdownSelection(event.target.value);
+            viewContext && viewContext.handleEntryTypeDropdownSelection(event.target.value);
     };
 
     const handleDelete = () => {
-        viewContext && viewContext.handleFIleTypeDropdownSelection(null);
+        viewContext && viewContext.handleEntryTypeDropdownSelection('');
     };
     return (
         <Box>

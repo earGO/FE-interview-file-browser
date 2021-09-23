@@ -5,14 +5,14 @@ import { UseViewContext } from '../../ViewContext';
 
 export const FileSizeGreaterThanFilter: React.FunctionComponent = () => {
     const viewContext = UseViewContext();
-    const fileSize = viewContext?.currentFileSize || 0;
+    const fileSize = viewContext?.currentFileSizeGtFilterValue || 0;
 
     const handleFileSizeFilterInputChange = (event: React.FormEvent<HTMLInputElement>) => {
-        viewContext && viewContext.handleFileSizeFilterInputChange(event);
+        viewContext && viewContext.handleFileSizeFilterInputChange(Number(event.currentTarget.value));
     };
 
     const handleDelete = () => {
-        viewContext && viewContext.handleDeleteFileSizeFilter();
+        viewContext && viewContext.handleFileSizeFilterInputChange(0);
     };
     return (
         <Box>
@@ -40,5 +40,3 @@ export const FileSizeGreaterThanFilter: React.FunctionComponent = () => {
         </Box>
     );
 };
-
-export default FileSizeGreaterThanFilter;

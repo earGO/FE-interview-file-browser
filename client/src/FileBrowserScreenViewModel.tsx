@@ -7,10 +7,10 @@ import FileBrowserView from './FileBrowserView';
 import { generateRequestVariablesOnFilters } from './generated-api/generateRequestVariablesOnFilters';
 
 function FileBrowserScreenViewModel() {
-    const [sizeGt, setSizeGt] = React.useState<number>(200);
-    const [sizeLt, setSizeLt] = React.useState<number | null>(null);
+    const [sizeGt, setSizeGt] = React.useState<number>(0);
+    const [sizeLt, setSizeLt] = React.useState<number>(0);
     const [entryNameFilter, setEntryNameFilter] = React.useState<string | null>(null);
-    const [fileExtensionFilter, setFileExtensionFilter] = React.useState<'Directory' | 'File' | null>(null);
+    const [entryTypeFilter, setEntryTypeFilter] = React.useState<'Directory' | 'File' | ''>('');
     const [page, setPage] = React.useState(1);
     const [currentPath, setCurrentPath] = React.useState('/');
     const [fileBrowserHistory, updateHistory] = React.useState<FileBrowserHistory[]>([
@@ -25,7 +25,7 @@ function FileBrowserScreenViewModel() {
             path: currentPath,
             page,
             where: {
-                ...generateRequestVariablesOnFilters(sizeGt, sizeLt, entryNameFilter, fileExtensionFilter),
+                ...generateRequestVariablesOnFilters(sizeGt, sizeLt, entryNameFilter, entryTypeFilter),
                 /**
                  * Entry Name Contains
                  * @name name_contains an entry "name" text value to search on
@@ -72,16 +72,20 @@ function FileBrowserScreenViewModel() {
         setPage(newPage + 1);
     };
 
-    const handleDelete = () => {
-        setSizeGt(0);
+    const handleFileSizeGreaterThanFilterInputChange = (newFilterValue: number): void => {
+        setSizeGt(newFilterValue);
     };
 
-    const handleFileSizeFilterInputChange = (event: React.FormEvent<HTMLInputElement>): void => {
-        setSizeGt(Number(event.currentTarget.value));
+    const handleFileSizeLessThanFilterInputChange = (newFilterValue: number): void => {
+        setSizeLt(newFilterValue);
     };
 
-    const handleFIleTypeDropdownSelection = (selectionValue: 'Directory' | 'File' | null): void => {
-        setFileExtensionFilter(selectionValue);
+    const handleEntryTypeDropdownSelection = (selectionValue: 'Directory' | 'File' | ''): void => {
+        setEntryTypeFilter(selectionValue);
+    };
+
+    const handleEntryNameFilterChange = (newEntryNameFilterValue: string): void => {
+        setEntryNameFilter(newEntryNameFilterValue);
     };
 
     const handleFilePathClick = (
@@ -97,23 +101,21 @@ function FileBrowserScreenViewModel() {
         }
     };
 
-    const handleSetFileSizeLesserThanFilterInput = (event: React.FormEvent<HTMLInputElement>): void => {
-        setSizeLt(Number(event.currentTarget.value));
-    };
-
     return (
         <ViewContextProvider
-            handleDeleteFileSizeFilter={handleDelete}
-            currentFileSize={sizeGt}
-            handleFileSizeFilterInputChange={handleFileSizeFilterInputChange}
+            currentFileSizeGtFilterValue={sizeGt}
+            handleFileSizeFilterInputChange={handleFileSizeGreaterThanFilterInputChange}
+            currentFileSizeLtFilterValue={sizeLt}
+            handleFileSizeLessThanFilterInputChange={handleFileSizeLessThanFilterInputChange}
             tableRows={rows}
             fileBrowserHistory={fileBrowserHistory}
             handleFilePathClick={handleFilePathClick}
             fileBrowserRowCount={rowCount}
             handleChangePage={handleChangePage}
             currentPage={page}
-            fileExtensionFilterValue={fileExtensionFilter}
-            handleFIleTypeDropdownSelection={handleFIleTypeDropdownSelection}
+            entryTypeFilterValue={entryTypeFilter}
+            handleEntryTypeDropdownSelection={handleEntryTypeDropdownSelection}
+            handleEntryNameFilterChange={handleEntryNameFilterChange}
         >
             <FileBrowserView />
         </ViewContextProvider>

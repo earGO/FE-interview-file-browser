@@ -2,15 +2,17 @@ import React from 'react';
 import { FileBrowserHistory } from '../common_types';
 
 export interface ViewContextContract {
-    handleDeleteFileSizeFilter: () => void;
-    currentFileSize: number;
-    handleFileSizeFilterInputChange: (event: React.FormEvent<HTMLInputElement>) => void;
+    currentFileSizeGtFilterValue: number;
+    handleFileSizeFilterInputChange: (newFilterValue: number) => void;
+    currentFileSizeLtFilterValue: number;
+    handleFileSizeLessThanFilterInputChange: (newFilterValue: number) => void;
     tableRows: any[];
     handleFilePathClick: (isUpDir: boolean, fileBrowserHistory: FileBrowserHistory[], path: string) => void;
     fileBrowserHistory: FileBrowserHistory[];
     fileBrowserRowCount: number;
     handleChangePage: (event: unknown, newPage: number) => void;
     currentPage: number;
-    handleFIleTypeDropdownSelection: (selectionValue: 'Directory' | 'File' | null) => void;
-    fileExtensionFilterValue: 'Directory' | 'File' | null;
+    handleEntryTypeDropdownSelection: (selectionValue: 'Directory' | 'File' | '') => void;
+    entryTypeFilterValue: 'Directory' | 'File' | '';
+    handleEntryNameFilterChange: (newEntryNameFilterValue: string) => void;
 }
