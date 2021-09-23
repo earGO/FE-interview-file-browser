@@ -24,7 +24,8 @@ export const EntryTypeFilter: React.FunctionComponent = () => {
                 color="primary"
                 onDelete={handleDelete}
                 label={
-                    <Box minWidth={128} display={'flex'} justifyContent={'flex-end'}>
+                    <Box minWidth={128} display={'flex'} justifyContent={'space-between'}>
+                        <strong id={'entry-type-filter-label'}>Type</strong>
                         <Select
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"

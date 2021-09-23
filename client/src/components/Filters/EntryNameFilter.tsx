@@ -28,7 +28,8 @@ export const EntryNameFilter: React.FunctionComponent = () => {
                 color="primary"
                 onDelete={handleDelete}
                 label={
-                    <Box minWidth={128} display={'flex'} justifyContent={'flex-end'}>
+                    <Box minWidth={128} display={'flex'} justifyContent={'flex-end'} alignContent={'center'}>
+                        <strong id={'entry-name-filter-label'}>File Name</strong>
                         <TextField
                             id="file-name-text-input"
                             value={localInputValue}
