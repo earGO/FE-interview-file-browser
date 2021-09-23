@@ -4,9 +4,13 @@ import { useListEntriesQuery } from './generated-api';
 import { ViewContextProvider } from './ViewContext';
 import { FileBrowserHistory } from './common_types';
 import FileBrowserView from './FileBrowserView';
+import { generateRequestVariablesOnFilters } from './generated-api/generateRequestVariablesOnFilters';
 
 function FileBrowserScreenViewModel() {
     const [sizeGt, setSizeGt] = React.useState<number>(200);
+    const [sizeLt, setSizeLt] = React.useState<number | null>(null);
+    const [entryNameFilter, setEntryNameFilter] = React.useState<string | null>(null);
+    const [fileExtensionFilter, setFileExtensionFilter] = React.useState<'Directory' | 'File' | null>(null);
     const [page, setPage] = React.useState(1);
     const [currentPath, setCurrentPath] = React.useState('/');
     const [fileBrowserHistory, updateHistory] = React.useState<FileBrowserHistory[]>([
@@ -21,13 +25,7 @@ function FileBrowserScreenViewModel() {
             path: currentPath,
             page,
             where: {
-                /**
-                 * File Size
-                 * @name size_gt a number value that file size should be greater than
-                 * @name size_lt a number value that file size should be less than
-                 */
-                // size_gt: sizeGt, // Int
-                // size_lt: Int,
+                ...generateRequestVariablesOnFilters(sizeGt, sizeLt, entryNameFilter, fileExtensionFilter),
                 /**
                  * Entry Name Contains
                  * @name name_contains an entry "name" text value to search on
@@ -93,6 +91,10 @@ function FileBrowserScreenViewModel() {
         } else {
             updateHistory([...fileBrowserHistoryParameter, { id: path, path }]);
         }
+    };
+
+    const handleSetFileSizeLesserThanFilterInput = (event: React.FormEvent<HTMLInputElement>): void => {
+        setSizeLt(Number(event.currentTarget.value));
     };
 
     return (
