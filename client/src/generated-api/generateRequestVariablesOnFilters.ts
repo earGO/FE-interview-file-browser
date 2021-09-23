@@ -17,8 +17,8 @@ export function generateRequestVariablesOnFilters(
         result['name_contains'] = entryNameFilter;
     }
     if (fileExtensionFilter) {
-        result['type_eq'] = entryNameFilter;
+        result['type_eq'] = fileExtensionFilter;
     }
-
+    console.log(result);
     return result;
 }

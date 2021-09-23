@@ -80,6 +80,10 @@ function FileBrowserScreenViewModel() {
         setSizeGt(Number(event.currentTarget.value));
     };
 
+    const handleFIleTypeDropdownSelection = (selectionValue: 'Directory' | 'File' | null): void => {
+        setFileExtensionFilter(selectionValue);
+    };
+
     const handleFilePathClick = (
         isUpDir: boolean,
         fileBrowserHistoryParameter: FileBrowserHistory[],
@@ -108,6 +112,8 @@ function FileBrowserScreenViewModel() {
             fileBrowserRowCount={rowCount}
             handleChangePage={handleChangePage}
             currentPage={page}
+            fileExtensionFilterValue={fileExtensionFilter}
+            handleFIleTypeDropdownSelection={handleFIleTypeDropdownSelection}
         >
             <FileBrowserView />
         </ViewContextProvider>

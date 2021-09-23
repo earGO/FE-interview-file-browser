@@ -36,3 +36,15 @@
     transform: rotate(360deg);
   }
 }
+
+#demo-simple-select{
+  color:white;
+}
+
+.MuiSelect-icon .MuiSvgIcon-root{
+  fill: white;
+}
+
+.MuiSelect-iconStandard{
+  fill:white;
+}
