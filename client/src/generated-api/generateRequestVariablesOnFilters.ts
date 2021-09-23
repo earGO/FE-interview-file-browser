@@ -19,6 +19,5 @@ export function generateRequestVariablesOnFilters(
     if (entryTypeFilter !== '') {
         result['type_eq'] = entryTypeFilter;
     }
-    console.log(result);
     return result;
 }

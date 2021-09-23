@@ -12,17 +12,12 @@ export const EntryNameFilter: React.FunctionComponent = () => {
     const debouncedInputValue = useDebounce(localInputValue, 400);
 
     useEffect(() => {
-        if (debouncedInputValue && viewContext) {
-            viewContext.handleEntryNameFilterChange(debouncedInputValue);
-        }
-    }, [debouncedInputValue]);
-
-    const fileExtensionFilterValue = viewContext?.entryTypeFilterValue || '';
+        viewContext && viewContext.handleEntryNameFilterChange(debouncedInputValue);
+    }, [debouncedInputValue, viewContext]);
 
     const handleFileNameInputChange = (event: any) => {
         setLocalInputValue(event.target.value as string);
     };
-
     const handleDelete = () => {
         setLocalInputValue('');
         viewContext && viewContext.handleEntryNameFilterChange('');

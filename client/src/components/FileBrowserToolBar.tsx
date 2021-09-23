@@ -4,6 +4,11 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import { EntryNameFilter, EntryTypeFilter, FileSizeGreaterThanFilter, FileSizeLessThanFilter } from './Filters';
 
+/* this thing will hold filters, taking care of title and filters alignment
+ * each filter takes care about communicating with view context on their own
+ * so this component takes care on composition and layout of filters
+ *  */
+
 export const FileBrowserToolBar: React.FunctionComponent = () => {
     return (
         <Toolbar>

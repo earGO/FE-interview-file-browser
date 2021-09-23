@@ -6,6 +6,12 @@ import { FileBrowserHistory } from './common_types';
 import FileBrowserView from './FileBrowserView';
 import { generateRequestVariablesOnFilters } from './generated-api/generateRequestVariablesOnFilters';
 
+/*
+ * Generally speaking I've refactored this to be a model-view-viewModel(ish), so
+ * this file only provides connections to the graph ql model and creates handlers,
+ * then it passes everything to context
+ * */
+
 function FileBrowserScreenViewModel() {
     const [sizeGt, setSizeGt] = React.useState<number>(0);
     const [sizeLt, setSizeLt] = React.useState<number>(0);
@@ -26,16 +32,6 @@ function FileBrowserScreenViewModel() {
             page,
             where: {
                 ...generateRequestVariablesOnFilters(sizeGt, sizeLt, entryNameFilter, entryTypeFilter),
-                /**
-                 * Entry Name Contains
-                 * @name name_contains an entry "name" text value to search on
-                 */
-                // name_contains: String,
-                /**
-                 * Type Equals
-                 * @name type_eq Exact match for Entry type
-                 */
-                // type_eq: "Directory" | "File",
             },
         },
     });
@@ -103,6 +99,8 @@ function FileBrowserScreenViewModel() {
 
     return (
         <ViewContextProvider
+            tableDataError={error}
+            tableDataLoading={loading}
             currentFileSizeGtFilterValue={sizeGt}
             handleFileSizeFilterInputChange={handleFileSizeGreaterThanFilterInputChange}
             currentFileSizeLtFilterValue={sizeLt}

@@ -2,6 +2,8 @@ import React from 'react';
 import { FileBrowserHistory } from '../common_types';
 
 export interface ViewContextContract {
+    tableDataLoading: boolean;
+    tableDataError: any;
     currentFileSizeGtFilterValue: number;
     handleFileSizeFilterInputChange: (newFilterValue: number) => void;
     currentFileSizeLtFilterValue: number;
